@@ -79,16 +79,16 @@ local function Operations(stack, heap, programcounter )
   end
 
 -- io
-  function self.stackIn ()
+  function self.charIn ()
   end
 
-  function self.stackOut ()
+  function self.charOut ()
   end
 
-  function self.heapIn ()
+  function self.numIn ()
   end
 
-  function self.heapOut ()
+  function self.numOut ()
   end
 
 
