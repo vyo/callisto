@@ -1,5 +1,12 @@
-# build order
+# architecture
+----------------------------------------
 
- - obfuscate withsquish, including uglify and minify
- - precompile with luac
+## data stack
+
+## data heap
+
+## io module
+
+## execution engine
+
 
