@@ -1,9 +1,10 @@
-local function Operations(stack, heap, programcounter )
+local function Operations(stack, heap, executor, io)
 
   local self = {}
---  local stack = stack or error('Need stack to operate on.')
---  local heap = heap or error('Need heap to operate on.')
---  local programcounter = programcounter or error('Need programcounter to operate on.')
+  local stack = stack or error('Need data stack to operate on.')
+  local heap = heap or error('Need data heap to operate on.')
+  local executor = executor or error('Need executor module to operate on.')
+  local io = io or error('Need io modul module to operate on.')
 
 -- stack
   function self.push (item)
@@ -56,26 +57,39 @@ local function Operations(stack, heap, programcounter )
     stack.push(heap.retrieve(stack.pop()))
   end  
     
--- flow
+-- executor
   function self.mark (label)
+    executor.mark(label)
   end
 
   function self.call (routine)
+    executor.call(routine)
   end
 
   function self.jump (label)
+    executor.jump(label)
   end
 
   function self.jzero (label)
+    local test = stack.pop()
+    if (test == 0) then
+      executor.jump(label)
+    end
   end
 
   function self.jneg (label)
+    local test = stack.pop()
+    if (test < 0) then
+      executor.jump(label)
+    end
   end
 
   function self.done ()
+    executor.callback()
   end
 
   function self.exit ()
+    return true
   end
 
 -- io
