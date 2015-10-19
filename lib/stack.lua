@@ -14,7 +14,7 @@ local function Stack (insecure)
 
   function self.pop ()
     local item = stack[top]
-    if (item == nil) then
+    if item == nil then
       error('Trying to retrieve from empty stack.')
     end
     top = top - 1
