@@ -1,10 +1,13 @@
-local function Operations(stack, heap, executor, io)
+local function Operations(stack, heap, flow, io)
 
   local self = {}
   local stack = stack or error('Need data stack to operate on.')
+  if stack.top==nil then
+    error('Need insecure access to data stack for efficient manipulation.')
+  end
   local heap = heap or error('Need data heap to operate on.')
-  local executor = executor or error('Need executor module to operate on.')
-  local io = io or error('Need io modul module to operate on.')
+  local flow = flow or error('Need flow module to operate on.')
+  local io = io or error('Need io module to operate on.')
 
 -- stack
   function self.push (item)
@@ -23,6 +26,18 @@ local function Operations(stack, heap, executor, io)
 
   function self.pop ()
     stack.pop()
+  end
+
+  function self.copy () -- whitespace 0.3+ only
+    stack.push(stack.stack[stack.stack.length - stack.pop()])  
+  end
+
+  function self.slide (n) -- whitespace 0.3+ only
+    local top = stack.pop() 
+    for i=1,n do
+      stack.pop()
+    end
+    stack.push(top)
   end
 
 -- arithmetic
@@ -57,35 +72,35 @@ local function Operations(stack, heap, executor, io)
     stack.push(heap.retrieve(stack.pop()))
   end  
     
--- executor
+-- flow
   function self.mark (label)
-    executor.mark(label)
+    flow.mark(label)
   end
 
   function self.call (routine)
-    executor.call(routine)
+    flow.call(routine)
   end
 
   function self.jump (label)
-    executor.jump(label)
+    flow.jump(label)
   end
 
   function self.jzero (label)
     local test = stack.pop()
     if (test == 0) then
-      executor.jump(label)
+      flow.jump(label)
     end
   end
 
   function self.jneg (label)
     local test = stack.pop()
     if (test < 0) then
-      executor.jump(label)
+      flow.jump(label)
     end
   end
 
   function self.done ()
-    executor.callback()
+    flow.callback()
   end
 
   function self.exit ()
@@ -94,19 +109,20 @@ local function Operations(stack, heap, executor, io)
 
 -- io
   function self.charIn ()
+    heap.store(stack.pop(), io.readChar())
   end
 
   function self.charOut ()
+    io.writeChar(stack.pop())
   end
 
-  function self.numIn ()
+  function self.numberIn ()
+    heap.store(stack.pop(), io.readNumber())
   end
 
-  function self.numOut ()
+  function self.numberOut ()
+    io.writeNumber(stack.pop())
   end
-
-
-  return Operations
 
 end
-
+return Operations

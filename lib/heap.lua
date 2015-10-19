@@ -12,3 +12,4 @@ local function Heap ()
 
   return self
 end
+return Heap

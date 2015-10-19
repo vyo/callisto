@@ -23,6 +23,4 @@ local function Stack (insecure)
     
   return self
 end
-
 return Stack
-

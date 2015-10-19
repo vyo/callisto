@@ -1,6 +1,8 @@
-local function Executor ()
+local function Flow ()
   local self = {} 
-  local Stack = require('stack')
+
+  package.path = '?;?.lua;lib/?;lib/?.lua' 
+  local Stack = require 'stack'
 
   local instructionStack = Stack(true)
   local callbackStack = Stack()
@@ -11,7 +13,7 @@ local function Executor ()
   function self.execute ()
     programCounter = 1
     local step = instructionStack.pop()
-    while (~step()) do
+    while step()==false do
       step = instructionStack.stack[programCounter]
     end
   end
@@ -25,8 +27,9 @@ local function Executor ()
   end
 
   function self.callback ()
-    jump(calbackStack.pop())
+    jump(callbackStack.pop())
   end
   
   return self
 end
+return Flow
