@@ -5,16 +5,16 @@ local function Io ()
     return io.read(1) 
   end
 
-  function self.writeChar ()
-
+  function self.writeChar (value)
+    print(string.char(value))
   end
 
   function self.readNumber ()
-    return io.read("*n")
+    return io.read("*number")
   end
 
   function self.writeNumber ()
-
+    print(value)
   end
 
   return self
