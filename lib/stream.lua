@@ -2,7 +2,7 @@ local function Io ()
   local self = {}
 
   function self.readChar ()
-    error('not implemented yet')
+    return io.read(1) 
   end
 
   function self.writeChar ()
@@ -10,7 +10,7 @@ local function Io ()
   end
 
   function self.readNumber ()
-
+    return io.read("*n")
   end
 
   function self.writeNumber ()
