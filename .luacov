@@ -1,0 +1,13 @@
+return {
+  ['statsfile'] = 'callisto.cov',
+  ['reportfile'] = 'callisto.report',
+  runreport = true,
+  deletestats = true,
+  ['include'] = {
+    'callisto',
+    'lib'
+  }
+--  ['exclude'] = {
+--    'test/$' 
+--  }
+}
