@@ -1,4 +1,4 @@
-local function Operations (stack, heap, flow, streams)
+local function Operations (stack, heap, flow, stream)
 
   local self = {}
   local stack = stack or error('Need data stack to operate on.')
@@ -7,7 +7,7 @@ local function Operations (stack, heap, flow, streams)
   end
   local heap = heap or error('Need data heap to operate on.')
   local flow = flow or error('Need flow module to operate on.')
-  local streams = streams or error('Need streams module to operate on.')
+  local stream = stream or error('Need stream module to operate on.')
 
   -- stack
   function self.push (item)
@@ -107,21 +107,21 @@ local function Operations (stack, heap, flow, streams)
     return true
   end
 
--- streams 
+-- stream 
   function self.charIn ()
-    heap.store(stack.pop(), streams.readChar())
+    heap.store(stack.pop(), stream.readChar())
   end
 
   function self.charOut ()
-    streams.writeChar(stack.pop())
+    stream.writeChar(stack.pop())
   end
 
   function self.numberIn ()
-    heap.store(stack.pop(), streams.readNumber())
+    heap.store(stack.pop(), stream.readNumber())
   end
 
   function self.numberOut ()
-    streams.writeNumber(stack.pop())
+    stream.writeNumber(stack.pop())
   end
 
   return self
