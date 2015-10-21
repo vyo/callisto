@@ -13,7 +13,7 @@ local function Io ()
     return io.read("*number")
   end
 
-  function self.writeNumber ()
+  function self.writeNumber (value)
     print(value)
   end
 
