@@ -1,6 +1,6 @@
 local stream = require 'stream'
 
-describe('Stream test', function ()
+describe('Stream module', function ()
   stream = stream()
  local out
 
