@@ -2,18 +2,22 @@ local stream = require 'stream'
 
 describe('Stream test', function ()
   stream = stream()
-  --mock io functions
-  io.read = function (flag)
-    if type(flag)=='number' then --reads the specified amount of chars
-      return 'a'
-    elseif type(flage)=='string' then --reads a single number
-      return 97
+ local out
+
+  setup(function()
+    --mock io functions
+    io.read = function (flag)
+      if type(flag)=='number' then --reads the specified amount of chars
+        return 'a'
+      elseif type(flag)=='string' then --reads a single number
+        return 97
+      end
     end
-  end
-  local out
-  print = function (value)
-    out = value
-  end
+    
+     _G.print = function (value)
+      out = value
+    end
+  end)
 
   describe('should expose functions for reading/writing character/numbers,', function ()
     
@@ -33,14 +37,14 @@ describe('Stream test', function ()
     it('i.e. read in numbers from STDIN', function ()
       assert.is_not_nil(stream.readNumber)
       assert.are.equals('function', type(stream.readNumber))
-      assert.is(97==stream.readNumber())
+      assert.are.equals(97, stream.readNumber())
     end)
 
     it('i.e. write out numbers to STDOUT', function ()
       assert.is_not_nil(stream.writeNumber)
       assert.are.equals('function', type(stream.writeNumber))
       stream.writeNumber(98)
-      assert.is(98==out)
+      assert.are.equals(98, out)
     end)
 
   end)
