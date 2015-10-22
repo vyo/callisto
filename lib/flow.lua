@@ -1,7 +1,7 @@
 local function Flow ()
   local self = {} 
 
-  package.path = '?;?.lua;lib/?;lib/?.lua' 
+  package.path = '?;?.lua;lib/?;lib/?.lua'..package.path
   local Stack = require 'stack'
 
   local instructionStack = Stack(true)
