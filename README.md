@@ -1,6 +1,6 @@
 callisto
 ========================================
-A Whitespace interpreter and tool suite, written in Lua.
+A Whitespace interpreter and tool suite, written in Lua
 
 #   commands
 ----------------------------------------
