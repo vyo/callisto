@@ -13,6 +13,10 @@ local function Interpreter ()
   local dataHeap = Heap()
   local streamModule = Stream()
 
+  function self.load(whitespace)
+
+  end
+
   return self
 end
 return Interpreter

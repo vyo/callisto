@@ -9,7 +9,7 @@ local function Operations (stack, heap, flow, stream)
   local flow = flow or error('Need flow module to operate on.')
   local stream = stream or error('Need stream module to operate on.')
 
-  -- stack
+-- stack
   function self.push (item)
     stack.push(item)
   end
